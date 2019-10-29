@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "BFF"
+  },
+  "host": "api.template-bff",
+  "x-google-endpoints": {
+    "name": "api.template-bff",
+    "allowCors": "true"
+  },
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/hello": {
+      "x-swagger-router-controller": "helloController",
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "description": "Returns 'Hello' to the caller",
+        "operationId": "getHello",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The name of the person to whom to say hello",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HelloWorldResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/starwars": {
+      "x-swagger-router-controller": "starWarsController",
+      "get": {
+        "tags": [
+          "Geek"
+        ],
+        "description": "Say hi to Luke Skywalker",
+        "operationId": "searchFilm",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "description": "The title of the star wars movie",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/StarWarsResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/starwars/films": {
+      "x-swagger-router-controller": "starWarsController",
+      "get": {
+        "tags": [
+          "Geek"
+        ],
+        "description": "List Starwars movies",
+        "operationId": "listFilms",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/StarWarsFilmsResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/starwars/films/{episode_id}": {
+      "x-swagger-router-controller": "starWarsController",
+      "get": {
+        "tags": [
+          "Geek"
+        ],
+        "description": "List a Starwars movie",
+        "operationId": "infoFilm",
+        "parameters": [
+          {
+            "name": "episode_id",
+            "in": "path",
+            "description": "The episode Id of the film to be found",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/StarWarsFilmModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/swagger": {
+      "x-swagger-pipe": "swagger_raw"
+    }
+  },
+  "definitions": {
+    "HelloWorldResponse": {
+      "required": [
+        "message",
+        "date",
+        "hour"
+      ],
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "hour": {
+          "type": "string"
+        }
+      }
+    },
+    "StarWarsResponse": {
+      "type": "string"
+    },
+    "StarWarsFilmsResponse": {
+      "type": "object"
+    },
+    "StarWarsFilmModel": {
+      "required": [
+        "title",
+        "release_date",
+        "episode_id",
+        "opening_crawl"
+      ],
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "release_date": {
+          "type": "string"
+        },
+        "episode_id": {
+          "type": "number"
+        },
+        "opening_crawl": {
+          "type": "string"
+        },
+        "characters": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "planets": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

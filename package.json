@@ -1,0 +1,42 @@
+{
+  "name": "starwars-bff",
+  "version": "0.0.1",
+  "description": "Starwars BFF from a Starter Template",
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "set NODE_ENV=production && node app.js",
+    "dev": "set NODE_ENV=development && npm i && nodemon app.js"    
+  },  
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"     
+    },
+    "lint-staged": {
+      "*.js": [
+        "eslint --fix",
+        "git add"
+      ]
+    }
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.12.3",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "swagger-tools": "^0.10.4",
+    "winston": "^3.2.1",
+    "@google-cloud/logging-winston": "^2.0.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "nodemon": "^1.19.1",
+    "jest": "^24.8.0",
+    "supertest": "^1.0.0",
+    "husky": "^3.0.3",
+    "lint-staged": "^9.2.1"
+  }
+}
